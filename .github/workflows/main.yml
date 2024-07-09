@@ -14,9 +14,15 @@ jobs:
       - name: 'Checkout'
         uses: actions/Checkout@v4
 
+      - name: Generate SHA
+        id: generate_sha
+        run: |
+          SHA = $(echo $GITHUB_SHA | head -c7)
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+
     # gerar tag de acordo com commit
       - name: Build docker image
-        run: docker build -t gustavosg/nlw.journey.api:latest .
+        run: docker build -t gustavosg/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} .
 
     # logar no container registry
     # enviar imagem após
