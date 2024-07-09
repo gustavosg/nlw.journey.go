@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  build-and-push:
+    name: 'Build and Push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/Checkout@v4
+
+    # gerar tag de acordo com commit
+      - name: Build docker image
+        run: docker build -t gustavosg/nlw.journey.api:latest .
+
+    # logar no container registry
+    # enviar imagem após
