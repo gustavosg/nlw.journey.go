@@ -27,8 +27,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build docker image
-        run: docker build -t gustavosg/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} .
+        run: docker build -t gustavosg85/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} .
 
+      - name: Push Image
+        run: docker push gustavosg85/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} .
 
-    # logar no container registry
-    # enviar imagem após
