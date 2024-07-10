@@ -30,5 +30,8 @@ jobs:
         run: docker build -t gustavosg85/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} .
 
       - name: Push Image
-        run: docker push gustavosg85/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} .
+        run: |
+          docker push gustavosg85/nlw.journey.api:${{ steps.generate_sha.outputs.sha }}
+          docker tag  gustavosg85/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} gustavosg85/nlw.journey.api:latest
+          docker push gustavosg85/nlw.journey.api:latest
 
